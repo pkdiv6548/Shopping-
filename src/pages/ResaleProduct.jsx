@@ -1,0 +1,2 @@
+import {useParams,useNavigate} from "react-router-dom";
+export default function ResaleProduct(){const {id}=useParams(),nav=useNavigate();return <main className="page-shell"><div className="resale-product"><div className="resale-photo">PRE-OWNED<br/>{id}</div><div><small>ATELIER RESALE</small><h1>Vintage wool blazer</h1><h2>₹4,990</h2><p>Authenticated demo listing with condition notes, seller information and circularity details.</p><button onClick={()=>nav("/cart")}>Add to bag</button></div></div></main>}
