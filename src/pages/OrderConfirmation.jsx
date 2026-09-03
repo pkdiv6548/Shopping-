@@ -1,0 +1,2 @@
+import {Link} from "react-router-dom";
+export default function OrderConfirmation(){return <main className="page-shell centered-page"><div className="success-mark">✓</div><small>ORDER CONFIRMED</small><h1>Thank you for your order</h1><p>Your demo order <strong>AT-20481</strong> has been confirmed. A confirmation email has been prepared.</p><div className="button-row"><Link className="solid-btn" to="/account/orders">View order</Link><Link className="outline-btn" to="/category/Women">Continue shopping</Link></div></main>}

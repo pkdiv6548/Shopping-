@@ -1,0 +1,2 @@
+import {useState} from "react";
+export default function Notifications(){const [items,setItems]=useState([["Order updates",true],["Price drops",true],["Back in stock",false],["Member events",true]]);return <main className="page-shell"><div className="page-hero"><small>ACCOUNT</small><h1>Notifications</h1><p>Choose which alerts appear in your account.</p></div><div className="toggle-list">{items.map(([n,v],i)=><label key={n}><span>{n}</span><input type="checkbox" checked={v} onChange={()=>setItems(a=>a.map((x,j)=>j===i?[x[0],!x[1]]:x))}/></label>)}</div></main>}

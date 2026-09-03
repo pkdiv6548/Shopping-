@@ -1,0 +1,1 @@
+import InfoPage from "./InfoPage"; export default function Newsletter(){return <InfoPage eyebrow="NEWSLETTER" title="The Atelier edit" lead="New arrivals, stories, styling notes and selected member events." sections={[{title:"What you'll receive",list:["New collection alerts","Editorial stories","Private sale and member access","Care and styling guides"]}]}/> }

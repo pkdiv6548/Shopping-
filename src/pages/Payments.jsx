@@ -1,0 +1,2 @@
+import {useState} from "react";
+export default function Payments(){const [saved,setSaved]=useState(false);return <main className="page-shell"><div className="page-hero"><small>ACCOUNT</small><h1>Payment methods</h1><p>Manage demo saved payment methods.</p></div><div className="payment-card"><b>•••• 4242</b><span>Visa · Expires 08/29</span><button onClick={()=>setSaved(true)}>Make default</button><button className="danger" onClick={()=>setSaved(true)}>Remove</button></div>{saved&&<div className="notice success">Payment preference updated.</div>}</main>}
