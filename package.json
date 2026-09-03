@@ -1,0 +1,20 @@
+{
+  "name": "atelier-enterprise-fashion-v3",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "vite": "^6.0.0"
+  },
+  "description": "Enterprise fashion ecommerce demo with separated commerce, account, support, legal, resale and admin pages."
+}
