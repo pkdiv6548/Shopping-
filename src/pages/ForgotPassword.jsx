@@ -1,0 +1,2 @@
+import {useState} from "react";
+export default function ForgotPassword(){const [sent,setSent]=useState(false);return <main className="auth-page"><div className="auth-card"><small>ACCOUNT</small><h1>Reset password</h1><p>Enter your email and we'll send a demo reset confirmation.</p><form onSubmit={e=>{e.preventDefault();setSent(true)}}><input required type="email" placeholder="Email address"/><button>Send reset link</button></form>{sent&&<div className="notice success">Reset instructions sent.</div>}</div></main>}
