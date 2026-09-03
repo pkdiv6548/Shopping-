@@ -7,52 +7,81 @@ import {
   ArrowRight
 } from "lucide-react";
 
+const RATE = 84;
+
 const money = value =>
-  `₹${Math.round(Number(value || 0) * 84).toLocaleString("en-IN")}`;
+  `₹${Math.round(
+    Number(value || 0) * RATE
+  ).toLocaleString("en-IN")}`;
 
 export default function Cart({
   items = [],
   onQty,
   onRemove
 }) {
-  const subtotal = items.reduce(
+  const safeItems = Array.isArray(items)
+    ? items.filter(Boolean)
+    : [];
+
+  const subtotal = safeItems.reduce(
     (sum, item) =>
       sum +
-      Number(item.price || 0) *
-        Number(item.qty || 0),
+      Number(item?.price || 0) *
+      Math.max(1, Number(item?.qty) || 1),
     0
   );
 
   const delivery =
     subtotal >= 100
       ? 0
-      : items.length
+      : safeItems.length > 0
         ? 12
         : 0;
 
   const total =
     subtotal + delivery;
 
+  const totalQuantity =
+    safeItems.reduce(
+      (sum, item) =>
+        sum +
+        Math.max(
+          1,
+          Number(item?.qty) || 1
+        ),
+      0
+    );
+
   return (
     <main className="section narrow">
       <div className="pageTitle">
-        <small>YOUR BAG</small>
+        <small>
+          YOUR BAG
+        </small>
 
         <h1>
           Shopping bag
         </h1>
+
+        {safeItems.length > 0 && (
+          <p>
+            {totalQuantity}{" "}
+            {totalQuantity === 1
+              ? "item"
+              : "items"}
+          </p>
+        )}
       </div>
 
-      {!items.length ? (
+      {safeItems.length === 0 ? (
         <div className="empty">
           <h2>
             Your bag is empty.
           </h2>
 
           <p>
-            Discover the latest
-            collection and add
-            something you love.
+            Discover the latest collection
+            and add something you love.
           </p>
 
           <Link
@@ -65,79 +94,123 @@ export default function Cart({
       ) : (
         <>
           <div className="cartList">
-            {items.map(item => (
-              <div
-                className="cartItem"
-                key={item.id}
-              >
-                <img
-                  src={item.images?.[0]}
-                  alt={item.name}
-                  loading="lazy"
-                />
+            {safeItems.map(item => {
+              const quantity =
+                Math.max(
+                  1,
+                  Number(item?.qty) || 1
+                );
 
-                <div>
-                  <small>
-                    {item.category}
-                  </small>
+              const lineTotal =
+                Number(item?.price || 0) *
+                quantity;
 
-                  <h3>
-                    {item.name}
-                  </h3>
+              const image =
+                item?.images?.[0] ||
+                item?.image ||
+                "";
 
-                  <p>
-                    {item.color}
-                    {" · "}
-                    {item.selectedSize ||
-                      item.sizes?.[0] ||
-                      "One size"}
-                  </p>
+              const selectedSize =
+                item?.selectedSize ||
+                item?.sizes?.[0] ||
+                "One size";
 
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onRemove?.(item.id)
-                    }
-                  >
-                    <Trash2 />
-                    Remove
-                  </button>
-                </div>
+              const selectedColor =
+                item?.selectedColor ||
+                item?.color ||
+                "";
 
-                <div className="qty">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onQty?.(item.id, -1)
-                    }
-                    aria-label="Decrease quantity"
-                  >
-                    <Minus />
-                  </button>
-
-                  <span>
-                    {item.qty}
-                  </span>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onQty?.(item.id, 1)
-                    }
-                    aria-label="Increase quantity"
-                  >
-                    <Plus />
-                  </button>
-                </div>
-
-                <b>
-                  {money(
-                    Number(item.price || 0) *
-                      Number(item.qty || 0)
+              return (
+                <div
+                  className="cartItem"
+                  key={`${item.id}-${selectedSize}-${selectedColor}`}
+                >
+                  {image ? (
+                    <img
+                      src={image}
+                      alt={
+                        item?.name ||
+                        "Product"
+                      }
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      className="cartImageFallback"
+                      aria-hidden="true"
+                    />
                   )}
-                </b>
-              </div>
-            ))}
+
+                  <div>
+                    <small>
+                      {item?.category ||
+                        "Collection"}
+                    </small>
+
+                    <h3>
+                      {item?.name ||
+                        "Product"}
+                    </h3>
+
+                    <p>
+                      {selectedColor ||
+                        "Standard"}
+
+                      {" · "}
+
+                      {selectedSize}
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onRemove?.(item.id)
+                      }
+                      aria-label={`Remove ${item?.name || "product"} from bag`}
+                    >
+                      <Trash2 />
+                      Remove
+                    </button>
+                  </div>
+
+                  <div className="qty">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onQty?.(
+                          item.id,
+                          -1
+                        )
+                      }
+                      aria-label={`Decrease quantity of ${item?.name || "product"}`}
+                    >
+                      <Minus />
+                    </button>
+
+                    <span>
+                      {quantity}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onQty?.(
+                          item.id,
+                          1
+                        )
+                      }
+                      aria-label={`Increase quantity of ${item?.name || "product"}`}
+                    >
+                      <Plus />
+                    </button>
+                  </div>
+
+                  <b>
+                    {money(lineTotal)}
+                  </b>
+                </div>
+              );
+            })}
           </div>
 
           <div className="summary">
@@ -163,6 +236,13 @@ export default function Cart({
               </b>
             </div>
 
+            {delivery > 0 && (
+              <small>
+                Free delivery on orders over{" "}
+                {money(100)}
+              </small>
+            )}
+
             <div className="total">
               <span>
                 Total
@@ -179,6 +259,13 @@ export default function Cart({
             >
               CHECKOUT
               <ArrowRight />
+            </Link>
+
+            <Link
+              className="btn full"
+              to="/category/new-arrivals"
+            >
+              CONTINUE SHOPPING
             </Link>
           </div>
         </>
