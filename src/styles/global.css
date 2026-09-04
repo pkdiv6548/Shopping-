@@ -79,3 +79,16 @@
 .card .visual:hover .hover{opacity:1}
 .card .visual > a > img.hover{opacity:0!important}
 .card .visual:hover > a > img.hover{opacity:1!important}
+.card .quick{
+	min-height:44px;
+	padding:12px 14px;
+	border:1px solid #111;
+	background:#111;
+	color:#fff;
+	cursor:pointer;
+	z-index:2;
+	transition:background-color .2s ease,color .2s ease;
+}
+.card .quick svg{display:block;stroke:currentColor}
+.card .quick:hover,.card .quick:focus-visible{background:#333;color:#fff}
+.card .quick:focus-visible{outline:2px solid #111;outline-offset:2px}
