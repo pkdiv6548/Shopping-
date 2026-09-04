@@ -53,3 +53,25 @@
 	.site-header .brand{font-size:16px}
 	.site-header .nav-actions{gap:6px}
 }
+
+.card .heart{
+	display:inline-grid;
+	place-items:center;
+	width:36px;
+	height:36px;
+	min-width:36px;
+	min-height:36px;
+	padding:0;
+	border:1px solid #d8d8d8;
+	border-radius:50%;
+	background:#fff;
+	color:#111;
+	cursor:pointer;
+	z-index:2;
+	transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+}
+.card .heart svg{display:block;width:18px;height:18px;stroke:currentColor}
+.card .heart:hover,.card .heart:focus-visible{border-color:#111;background:#111;color:#fff}
+.card .heart:focus-visible{outline:2px solid #111;outline-offset:3px}
+.card .heart.on{background:#111;border-color:#111;color:#fff}
+.card .heart:active{transform:scale(.94)}
