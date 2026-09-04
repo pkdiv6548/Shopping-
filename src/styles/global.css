@@ -77,3 +77,5 @@
 .card .heart:active{transform:scale(.94)}
 .card .visual .hover{opacity:0}
 .card .visual:hover .hover{opacity:1}
+.card .visual > a > img.hover{opacity:0!important}
+.card .visual:hover > a > img.hover{opacity:1!important}
