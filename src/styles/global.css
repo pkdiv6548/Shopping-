@@ -75,3 +75,5 @@
 .card .heart:focus-visible{outline:2px solid #111;outline-offset:3px}
 .card .heart.on{background:#111;border-color:#111;color:#fff}
 .card .heart:active{transform:scale(.94)}
+.card .visual .hover{opacity:0}
+.card .visual:hover .hover{opacity:1}
