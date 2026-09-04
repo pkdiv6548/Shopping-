@@ -312,6 +312,11 @@ export default function App() {
         />
 
         <Route
+          path="/product"
+          element={<Product {...pageProps} />}
+        />
+
+        <Route
           path="/search"
           element={<Search products={products} />}
         />

@@ -1,5 +1,5 @@
 .btn.light{position:static;inset:auto;display:inline-flex;width:auto;height:auto;place-items:initial;background:#fff;color:#111;z-index:auto}
-.lightbox{position:fixed;inset:0;background:#000e;z-index:100;display:grid;place-items:center}
+.lightbox{position:fixed;inset:0;background:#000e;z-index:100;display:grid;place-items:center;overflow:hidden;padding:24px}
 .site-header{width:100%;overflow:hidden}
 .nav-main{min-width:0}
 .nav-main nav,.nav-actions{min-width:0}
@@ -92,3 +92,7 @@
 .card .quick svg{display:block;stroke:currentColor}
 .card .quick:hover,.card .quick:focus-visible{background:#333;color:#fff}
 .card .quick:focus-visible{outline:2px solid #111;outline-offset:2px}
+
+.lightbox{overflow:hidden;padding:24px}
+.lightbox .lb{width:min(80vw,850px);height:min(85vh,900px);min-width:0;min-height:0}
+.lightbox .lb img{display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;transform-origin:center;will-change:transform}
