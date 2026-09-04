@@ -1,4 +1,4 @@
-export const products=[
+const productSeed=[
   {
     "id": 1,
     "name": "Fluid Satin Dress",
@@ -1883,3 +1883,11 @@ export const products=[
     ]
   }
 ];
+
+const unavailableImage="https://images.unsplash.com/photo-1506629905607-d9c6a4a5b4b0?auto=format&fit=crop&w=1200&q=85";
+const fallbackImage="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?auto=format&fit=crop&w=1200&q=85";
+
+export const products=productSeed.map(product => ({
+  ...product,
+  images: product.images.map(image => image === unavailableImage ? fallbackImage : image)
+}));
